@@ -1,0 +1,62 @@
+package Prodigy_Infotech;
+
+import java.util.Scanner;
+
+public class TemperatureConverter 
+{
+    public static void main(String[] args) 
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter temperature value: ");
+        double temperature = scanner.nextDouble();
+        
+        System.out.print("Enter unit of measurement (Celsius, Fahrenheit, or Kelvin): ");
+        String originalUnit = scanner.next().toLowerCase();
+
+        double convertedToFahrenheit = convertToCelsiusToFahrenheit(temperature, originalUnit, "Fahrenheit");
+        double convertedToKelvin = convertToCelsiusToKelvin(temperature, originalUnit, "Kelvin");
+
+        System.out.println("Converted to Fahrenheit: " + convertedToFahrenheit + " °F");
+        System.out.println("Converted to Kelvin: " + convertedToKelvin + " K");
+
+        scanner.close();
+    }
+    private static double convertToCelsiusToFahrenheit(double temperature, String originalUnit, String targetUnit) 
+    {
+        if (originalUnit.equals("celsius")) 
+        {
+            return (temperature * 9 / 5) + 32;
+        }
+        else if (originalUnit.equals("fahrenheit")) 
+        {
+            return temperature;
+        }
+        else if (originalUnit.equals("kelvin")) 
+        {
+            return (temperature - 273.15) * 9 / 5 + 32;
+        }
+        else 
+        {
+            throw new IllegalArgumentException("Invalid unit of measurement");
+        }
+    }
+    private static double convertToCelsiusToKelvin(double temperature, String originalUnit, String targetUnit) 
+    {
+        if (originalUnit.equals("celsius")) 
+        {
+            return temperature + 273.15;
+        }
+        else if (originalUnit.equals("fahrenheit")) 
+        {
+            return (temperature - 32) * 5 / 9 + 273.15;
+        }
+        else if (originalUnit.equals("kelvin")) 
+        {
+            return temperature;
+        }
+        else 
+        {
+            throw new IllegalArgumentException("Invalid unit of measurement");
+        }
+    }
+}
