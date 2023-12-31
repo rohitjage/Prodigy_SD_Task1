@@ -1,0 +1,101 @@
+package intern;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class SimpConManSys
+{
+    private String name;
+    private String phone;
+    private String email;
+    public SimpConManSys(String name, String phone, String email) 
+    {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+    }
+    public String getName() 
+    {
+        return name;
+    }
+    public String getPhone() 
+    {
+        return phone;
+    }
+    public String getEmail() 
+    {
+        return email;
+    }
+}
+class ContactManager 
+{
+    private List<SimpConManSys> contacts;
+
+    public ContactManager() 
+    {
+        this.contacts = new ArrayList<>();
+    }
+
+    public void addContact(SimpConManSys contact)
+    {
+        contacts.add(contact);
+        System.out.println("Contact "+contact.getName()+ " added successfully!\n");
+    }
+
+    public void viewContacts() 
+    {
+        if (contacts.isEmpty()) 
+        {
+            System.out.println("No contacts available.");
+        }
+        else
+        {
+            System.out.println("Contacts:");
+            for (SimpConManSys contact : contacts) 
+            {
+                System.out.println("\nName: " + contact.getName()+", Phone: " + contact.getPhone()+", Email: " + contact.getEmail());
+            }
+        }
+    }
+
+    public void searchContact(String name) 
+    {
+        List<SimpConManSys> matchingContacts = new ArrayList<>();
+        for (SimpConManSys contact : contacts) 
+        {
+            if (contact.getName().toLowerCase().contains(name.toLowerCase()))
+            {
+                matchingContacts.add(contact);
+            }
+        }
+
+        if (matchingContacts.isEmpty()) 
+        {
+            System.out.println("No contacts found with the name '" + name + "'.");
+        } 
+        else 
+        {
+            System.out.println("\nContacts matching '" + name + "':");
+            for (SimpConManSys contact : matchingContacts) 
+            {
+                System.out.println("\nName: " + contact.getName()+", Phone: " + contact.getPhone()+", Email: " + contact.getEmail());
+            }
+        }
+    }
+}
+
+public class SimpConManSys1
+{
+    public static void main(String[] args) 
+    {
+        ContactManager contactManager = new ContactManager();
+        SimpConManSys contact1 = new SimpConManSys("Raj Verma", "1234567890", "raj.verma11@example.com");
+        SimpConManSys contact2 = new SimpConManSys("Rajesh Sharma", "9876543210", "rajesh.sharma21@example.com");
+        contactManager.addContact(contact1);
+        contactManager.addContact(contact2);
+        contactManager.viewContacts();
+
+        contactManager.searchContact("Raj");
+        contactManager.searchContact("Mahesh");
+    }
+}
